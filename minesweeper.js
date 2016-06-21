@@ -29,7 +29,16 @@ function getRow (element) {
   var cellList = element.classList
     for (var i = 0; i < cellList.length; i ++) {
       if (cellList[i].substring(0,3) === 'row') {
-        return Number(classes[i].split("-")[1]);
+        return Number(cellList[i].split("-")[1]);
+      }
+    }
+}
+
+function getCol (element) {
+  var cellList = element.classList
+    for (var i = 0; i < cellList.length; i ++) {
+      if (cellList[i].substring(0,3) === 'col') {
+        return Number(cellList[i].split("-")[1]);
       }
     }
 }
