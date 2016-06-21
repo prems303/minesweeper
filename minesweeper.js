@@ -8,6 +8,7 @@ function startGame () {
    var boardCells = document.getElementsByClassName('board')[0].children;
     for (var i = 0; i < boardCells.length; i ++) {
      addListeners(boardCells[i]);
+     addCellToBoard(boardCells[i]);
     }
 }
 
@@ -41,4 +42,13 @@ function getCol (element) {
         return Number(cellList[i].split("-")[1]);
       }
     }
+}
+
+function addCellToBoard (element) {
+  var newCell = {
+    row: getRow(element),
+    col: getCol(element),
+    isMine: element.classList.contains('mine')
+  };
+  board.cells.push(newCell);
 }
