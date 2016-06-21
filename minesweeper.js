@@ -1,9 +1,13 @@
 document.addEventListener('DOMContentLoaded', startGame)
 
+var board = {
+  cells:[]
+};
+
 function startGame () {
    var boardCells = document.getElementsByClassName('board')[0].children;
     for (var i = 0; i < boardCells.length; i ++) {
-     addListeners(boardCells[i])
+     addListeners(boardCells[i]);
     }
 }
 
@@ -19,4 +23,13 @@ function showCell(evt) {
 function markCell (evt) {
   evt.preventDefault()
   evt.target.classList.toggle('marked')
+}
+
+function getRow (element) {
+  var cellList = element.classList
+    for (var i = 0; i < cellList.length; i ++) {
+      if (cellList[i].substring(0,3) === 'row') {
+        return Number(classes[i].split("-")[1]);
+      }
+    }
 }
