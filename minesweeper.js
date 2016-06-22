@@ -92,5 +92,5 @@ function checkForWin () {
         return;
       }
     }
-    alert('You Won!');
+    alert("You have Won!");
 }
