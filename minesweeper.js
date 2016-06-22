@@ -10,8 +10,8 @@ function startGame () {
      addListeners(boardCells[i]);
      addCellToBoard(boardCells[i]);
     }
-      for (var j = 0; j < board.cells.length; j++) {
-        board.cells[j].surroundingMines = countSurroundingMines(board.cells[j]);
+      for (var i = 0; i < board.cells.length; i++) {
+        board.cells[i].surroundingMines = countSurroundingMines(board.cells[i]);
       }
 }
 
@@ -28,6 +28,12 @@ function showCell (evt) {
 function markCell (evt) {
   evt.preventDefault();
   evt.target.classList.toggle('marked');
+  evt.target.classList.toggle('hidden');
+    for (var i = 0; i < board.cell.length; i++) {
+      if (board.cells[i].row === getRow(evt.target) && board.cells[i].col === getCol(evt.target)) {
+        board.cells[i].isMarked = true;
+      }
+    }
 }
 
 function getRow (element) {
