@@ -21,9 +21,13 @@ function addListeners (element) {
 }
 
 function showCell (evt) {
-  evt.target.classList.remove('hidden');
-  showSurrounding(evt.target);
-  checkForWin;
+  if (evt.target.classList.contains('mine')) {
+    showAllMines();
+  } else {
+    evt.target.classList.remove('hidden');
+    showSurrounding(evt.target);
+    checkForWin()
+   } 
 }
 
 function markCell (evt) {
@@ -35,7 +39,7 @@ function markCell (evt) {
         board.cells[i].isMarked = true;
       }
     }
-    checkForWin;
+    checkForWin()
 }
 
 function getRow (element) {
@@ -82,8 +86,7 @@ function checkForWin () {
     for (var i = 0; i < board.cells.length; i++) {
       if (board.cells[i].isMine === true && board.cells[i].isMarked === true) {
       number++;
-      }
-        else if (board.cells[i].isMine === true && board.cells[i].isMarked === false) {
+      }else if (board.cells[i].isMine === true && board.cells[i].isMarked === false) {
         number++;
         }
     }
@@ -93,4 +96,13 @@ function checkForWin () {
       }
     }
     alert("You have Won!");
+}
+
+function showAllMines () {
+  boardCells = document.getElementsByClassName('board')[0].children;
+    for (var i = 0; i < boardCells.length; i++) {
+      if (boardCells[i].classList.contains('hidden')) {
+        boardCells[i].classList.remove('hidden');
+      }
+    }
 }
