@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', startGame)
-
+//global variable
 var board = {
   cells:[]
 };
@@ -21,13 +21,14 @@ function addListeners (element) {
 }
 
 function showCell (evt) {
+  evt.target.classList.remove('hidden');
   if (evt.target.classList.contains('mine')) {
     showAllMines();
     alert("You have Lost!");
+    resetGame();
   } else {
     showSurrounding(evt.target);
-    evt.target.classList.remove('hidden');
-    checkForWin()
+    checkForWin();
    } 
 }
 
@@ -40,7 +41,7 @@ function markCell (evt) {
         board.cells[i].isMarked = true;
       }
     }
-    checkForWin()
+    checkForWin();
 }
 
 function getRow (element) {
@@ -97,6 +98,7 @@ function checkForWin () {
       }
     }
     alert("You have Won!");
+    resetGame();
 }
 
 function showAllMines () {
@@ -106,4 +108,12 @@ function showAllMines () {
         boardCells[i].classList.remove('hidden');
       }
     }
+  }
+
+  function resetGame () {
+    var boardCells = document.getElementsByClassName('board')[0].children;
+    var board = {
+      cells:[]
+    };
+    startGame();
   }
