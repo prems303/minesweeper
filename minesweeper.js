@@ -23,9 +23,10 @@ function addListeners (element) {
 function showCell (evt) {
   if (evt.target.classList.contains('mine')) {
     showAllMines();
+    alert("You have Lost!");
   } else {
-    evt.target.classList.remove('hidden');
     showSurrounding(evt.target);
+    evt.target.classList.remove('hidden');
     checkForWin()
    } 
 }
@@ -84,9 +85,9 @@ function checkForWin () {
   var number = 0,
       boardCells = document.getElementsByClassName('board')[0].children;
     for (var i = 0; i < board.cells.length; i++) {
-      if (board.cells[i].isMine === true && board.cells[i].isMarked === true) {
+      if (board.cells[i].isMine === false && board.cells[i].isMarked === true) {
       number++;
-      }else if (board.cells[i].isMine === true && board.cells[i].isMarked === false) {
+      }else if (board.cells[i].isMine === true && board.cells[i].isMarked === true) {
         number++;
         }
     }
@@ -99,10 +100,10 @@ function checkForWin () {
 }
 
 function showAllMines () {
-  boardCells = document.getElementsByClassName('board')[0].children;
+  var boardCells = document.getElementsByClassName('board')[0].children;
     for (var i = 0; i < boardCells.length; i++) {
       if (boardCells[i].classList.contains('hidden')) {
         boardCells[i].classList.remove('hidden');
       }
     }
-}
+  }
