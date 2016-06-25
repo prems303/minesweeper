@@ -44,6 +44,7 @@ function markCell (evt) {
     checkForWin();
 }
 
+//get row number
 function getRow (element) {
   var cellList = element.classList;
     for (var i = 0; i < cellList.length; i++) {
@@ -53,6 +54,7 @@ function getRow (element) {
     }
 }
 
+//get column number
 function getCol (element) {
   var cellList = element.classList;
     for (var i = 0; i < cellList.length; i++) {
@@ -62,6 +64,7 @@ function getCol (element) {
     }
 }
 
+//add row & column cells to board
 function addCellToBoard (element) {
   var newCell = {
     row: getRow(element),
@@ -82,6 +85,7 @@ function countSurroundingMines (cell) {
       return number;
 }
 
+//check if you have won the game & reset the game
 function checkForWin () {
   var number = 0,
       boardCells = document.getElementsByClassName('board')[0].children;
@@ -106,13 +110,21 @@ function showAllMines () {
     for (var i = 0; i < boardCells.length; i++) {
       if (boardCells[i].classList.contains('hidden')) {
         boardCells[i].classList.remove('hidden');
-      }
+        boardCells[i].classList.remove('marked');
+      } 
     }
   }
 
+//reset the game
   function resetGame () {
     var boardCells = document.getElementsByClassName('board')[0].children;
-    var board = {
+      for (var i = 0; i < boardCells.length; i++) {
+          boardCells[i].classList.add('hidden');
+          boardCells[i].classList.remove('marked');
+          boardCells[i].innerHTML = '';
+      }
+      //re-initialize with empty cells & start game again
+      board = {
       cells:[]
     };
     startGame();
