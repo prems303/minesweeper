@@ -24,7 +24,9 @@ function showCell (evt) {
   evt.target.classList.remove('hidden');
   if (evt.target.classList.contains('mine')) {
     showAllMines();
-    alert("You have Lost!");
+    //play the sound of bomb
+    document.getElementsByTagName("audio")[0].play();
+    alert("You have Lost! Try again");
     resetGame();
   } else {
     showSurrounding(evt.target);
@@ -101,6 +103,8 @@ function checkForWin () {
         return;
       }
     }
+    //play the sound of applause
+    document.getElementsByTagName("audio")[1].play();
     alert("You have Won!");
     resetGame();
 }
@@ -113,6 +117,7 @@ function showAllMines () {
         boardCells[i].classList.remove('marked');
       } 
     }
+
   }
 
 //reset the game
@@ -127,5 +132,18 @@ function showAllMines () {
       board = {
       cells:[]
     };
+    randomMine(5);
     startGame();
+    
+  }
+  
+  //place mines randomly when game is reset
+  function randomMine (number) {
+    var boardCells = document.getElementsByClassName('board')[0].children;
+      for (var i = 0; i < number.length; i++) {
+        var random = Math.floor(Math.random()*number.length);
+          if (i === mine) {
+            boardCells[i].classList.add('mine');
+          }
+      }
   }
